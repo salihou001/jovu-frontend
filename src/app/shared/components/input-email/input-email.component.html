@@ -1,1 +1,17 @@
-<p>input-email works!</p>
+<div class="contain-form-input-email">
+    <label [for]="id" class="label">{{ label }}</label>
+    <div class="form-input">
+      <input 
+        type="email" 
+        [(ngModel)]="email" 
+        (input)="onInputChange($event)" 
+        [placeholder]="placeholder"
+        [id]="id" 
+        [class]="inputClass" 
+        (ngModelChange)="this.emailChange.emit(this.email)" 
+        nbInput 
+        fullWidth
+        (keyup.enter)="this.enterPressed.emit()" />
+    </div>
+  </div>
+  
