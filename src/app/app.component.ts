@@ -1,11 +1,12 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { createSwapy } from 'swapy';
 import { InputPasswordComponent } from "./shared/components/input-password/input-password.component";
+import { InputTextComponent } from "./shared/components/input-text/input-text.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [InputPasswordComponent],
+  imports: [InputPasswordComponent, InputTextComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
