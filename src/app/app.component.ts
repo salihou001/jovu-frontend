@@ -1,14 +1,16 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { createSwapy } from 'swapy';
+import { InputPasswordComponent } from "./shared/components/input-password/input-password.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [],
+  imports: [InputPasswordComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+  currentPwd!: string;
   @ViewChild('container', { static: true }) container!: ElementRef;
 
   private swapyInstance: any;
@@ -34,5 +36,9 @@ export class AppComponent {
     if (this.swapyInstance) {
       this.swapyInstance.destroy();
     }
+  }
+
+  resetpassword() {
+    console.log(this.currentPwd)
   }
 }

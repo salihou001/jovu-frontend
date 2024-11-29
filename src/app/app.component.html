@@ -1,34 +1,10 @@
-<div #container class="container">
-  <div class="slot a" data-swapy-slot="1">
-    <div class="item a" data-swapy-item="a">
-      <div class="handle" data-swapy-handle></div>
-      <div>A</div>
-    </div>
-  </div>
-  <div class="slot b" data-swapy-slot="2">
-    <div class="item b" data-swapy-item="b">
-      <div>B</div>
-    </div>
-  </div>
-  <div class="slot c" data-swapy-slot="3">
-    <div class="item c" data-swapy-item="c">
-      <div>C</div>
-    </div>
-  </div>
-  <div class="slot a" data-swapy-slot="4">
-    <div class="item a" data-swapy-item="d">
-      <div class="handle" data-swapy-handle></div>
-      <div>A</div>
-    </div>
-  </div>
-  <div class="slot b" data-swapy-slot="5">
-    <div class="item b" data-swapy-item="e">
-      <div>B</div>
-    </div>
-  </div>
-  <div class="slot c" data-swapy-slot="6">
-    <div class="item c" data-swapy-item="f">
-      <div>C</div>
+<div class="super-container">
+  <div class="sign-box">
+    <h1>Atlas Tech Corp Ltd</h1>
+    <div>
+      <app-input-password [label]="'Mot de passe actuel'" [placeholder]="'Saisir mot de passe actuel'"
+        [(password)]="currentPwd" [id]="'currentPwd'" (enterPressed)="resetpassword()">
+      </app-input-password>
     </div>
   </div>
 </div>

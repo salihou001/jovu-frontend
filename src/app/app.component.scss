@@ -1,31 +1,21 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 20px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
+.super-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.sign-box {
+  height: 60vh;
+  width: 60vw;
+  background-color: #b66262;
+  border-radius: 30px;
+
+  h1 {
+    font-size: 30px;
+    text-align: center;
+    color: #fff;
   }
-  
-  .slot {
-    width: 85px;
-    height: 85px;
-    margin: 10px;
-    background-color: white;
-    border: 2px dashed #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .item {
-    width: 80px;
-    height: 80px;
-    background-color: #007bff;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-  }
-  
+}
