@@ -1,17 +1,17 @@
 <div class="auth-shared-container">
-    <h1>Bienvenue chez Atlas Tech Corp Ltd</h1>
-    <p>Commencez maintenant, c'est gratuit. Aucune carte de crédit nécessaire.</p>
+    <h1>Welcome to Atlas Tech Corp Ltd</h1>
+    <p>Get started now, it's free. No credit card needed.</p>
     <div class="form-groups">
         <div class="form-wrapper">
             @defer () { <app-input-email [placeholder]="'email@gmail.com'"></app-input-email> }
-            @defer () { <app-input-password [placeholder]="'Entrer votre mot de passe'"></app-input-password> }
+            @defer () { <app-input-password [placeholder]="'Password'"></app-input-password> }
             @if(isSignUp()) {
-                @defer () { <app-input-password [placeholder]="'Confirmer votre mot de passe'"></app-input-password> }
+                @defer () { <app-input-password [placeholder]="'Confirm Password'"></app-input-password> }
             }
             <button class="signUpBtn">{{ isSignUp() ? 'S\'inscrire' : 'Connexion' }}</button>
-            <p>En poursuivant, vous acceptez </p>
-            <p>les <span class="condition">Conditions d'utilisation</span> et la <span class="condition">Politique de confidentialité</span></p>
-            <p class="login-btn">{{ isSignUp() ? 'Vous avez deja un compte' : 'Vous n\'avez pas de compte'}} ?  <span class="condition" (click)="goToLogin(isSignUp() ? true : false)">{{ isSignUp() ? 'Connexion' : 'S\'inscrire'}}</span></p>
+            <p>By continuing, you agree </p>
+            <p>les <span class="condition">Terms of Use</span> and <span class="condition">Privacy Policy</span></p>
+            <p class="login-btn">{{ isSignUp() ? 'You already have an account' : 'You don\'t have an account'}} ?  <span class="condition" (click)="goToLogin(isSignUp() ? true : false)">{{ isSignUp() ? 'Login' : 'Sign up'}}</span></p>
         </div>
     </div>
 </div>
