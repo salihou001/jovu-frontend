@@ -23,4 +23,5 @@ export const routes: Routes = [
             },
         ],
     },
+    { path: 'activity', loadComponent: () => import('./pages/activity/activity.component').then(m => m.ActivityComponent) },
 ];
