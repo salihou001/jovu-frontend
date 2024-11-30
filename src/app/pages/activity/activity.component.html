@@ -26,6 +26,11 @@
                     <app-add-task></app-add-task>
 
                     <div class="box-list" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="tasks">
+                        @if(tasks.length === 0) {
+                            <div class="placeholder">
+                                Glissez une tâche ici
+                            </div>
+                        }
                         @for (task of tasks; track $index) {
                           @defer () { 
                             <div cdkDrag>
@@ -42,6 +47,11 @@
                     <app-task-status></app-task-status>
                     <app-add-task></app-add-task>
                     <div class="box-list" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="tasks1">
+                        @if(tasks1.length === 0) {
+                            <div class="placeholder">
+                                Glissez une tâche ici
+                            </div>
+                        }
                         @for (task of tasks1; track $index) {
                           @defer () { 
                             <div cdkDrag>
@@ -58,6 +68,11 @@
                     <app-task-status></app-task-status>
                     <app-add-task></app-add-task>
                     <div class="box-list" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="tasks2">
+                        @if(tasks2.length === 0) {
+                            <div class="placeholder">
+                                Glissez une tâche ici
+                            </div>
+                        }
                         @for (task of tasks2; track $index) {
                           @defer () { 
                             <div class="example-box" cdkDrag>
@@ -73,6 +88,11 @@
                     <app-task-status></app-task-status>
                     <app-add-task></app-add-task>
                     <div class="box-list" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="tasks3">
+                        @if(tasks3.length === 0) {
+                            <div class="placeholder">
+                                Glissez une tâche ici
+                            </div>
+                        }
                         @for (task of tasks3; track $index) {
                           @defer () { 
                             <div cdkDrag>
