@@ -1,5 +1,5 @@
 .add-task-container {
-    width: 100%;
+    width: 100% !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,6 +9,10 @@
     border: 1px solid #e2e8f0;
     cursor: pointer;
     border-radius: 5px;
+    margin-bottom: 8px;
+    // -webkit-box-shadow: -3px -1px 20px 3px rgba(226, 232, 240, 1);
+    // -moz-box-shadow: -3px -1px 20px 3px rgba(226, 232, 240, 1);
+    // box-shadow: -3px -1px 20px 3px rgba(226, 232, 240, 1);
 
     .add-task-box {
         display: flex;
@@ -16,5 +20,6 @@
         gap: 8px;
         color: #6161FF;
         font-weight: 500;
+        font-size: 14px;
     }
 }

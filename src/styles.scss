@@ -1,16 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('/Poppins/Poppins-Regular.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    background-color: #E5E5E5;    
+    background-color: #f3f4f6;
 }
 
-img, svg, video {
+img,
+svg,
+video {
     width: unset;
     overflow-clip-margin: content-box;
     overflow: clip;
@@ -41,7 +52,7 @@ img, svg, video {
         border: none;
         outline: none;
     }
-    
+
 }
 
 .input:hover {

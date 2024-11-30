@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: space-between;
     padding-right: 5px;
+    margin-bottom: 8px;
 
     .task-status-left {
         display: flex;
@@ -20,19 +21,23 @@
         .task-status-left__number {
             font-size: 16px;
             font-weight: 500;
-            background-color: #f8fafc;
-            padding:  .3em;
+            background-color: white;
             border-radius: 20px;
-            width: 40px;
+            width: 45px;
             display: flex;
             font-weight: 500;
             align-items: center;
-            justify-content: center; 
+            justify-content: center;
             margin-left: 5px;
         }
 
         .task-status-left__title {
             font-weight: 600;
         }
+
+    }
+
+    .task-status-right {
+        cursor: pointer;
     }
 }
