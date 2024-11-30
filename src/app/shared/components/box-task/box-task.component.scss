@@ -1,15 +1,29 @@
+.slot {
+    z-index: -1;
+    position: relative;
+    width: 345px;
+    height: 100%;
+    margin: 10px;
+    background-color: white;
+    // border: 1px dashed #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+  }
+
 .box-task-con {
-    width: 300px;
+    width: 350px;
     background: #fff;
     border-radius: 5px;
     border: 1px solid #ccc;
-    padding: .8em 1em .8em .5em;
 
     .box-task-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 8px;
+        padding: .8em .5em .8em .8em;
 
         .box-task-tag {
             font-weight: 500;
@@ -19,11 +33,15 @@
         }
 
         .box-task-icon {
+            color: #a1a2a3;
+            padding: .5em;
             cursor: pointer;
         }
     }
 
     .box-task-body {
+        padding: .8em 1em .8em .8em;
+
         h4 {
             padding-top: 1em;
             font-weight: 500;
@@ -31,10 +49,45 @@
 
         p {
             width: 100%;
-            // text-align: justify;
-            border: 1px solid #ccc;
-            padding-top: 1em;
-            color: #969696;
+            padding-top: .5em;
+            text-wrap: pretty;
+            color: #837a7a;
+        }
+
+        .result {
+            border: 1px solid #e2e8f0;
+            width: fit-content;
+            padding: .3em;
+            border-radius: 5px;
+            color: #a1a2a3;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+    }
+
+    .box-task-footer {
+        width: 100%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: end;
+        border-top: 1px solid #ccc;; 
+
+        .box-task-footer__right {
+            padding: 1.5em 1em 1.5em .5em;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #a1a2a3;
+
+            div {
+                display: inline-flex;
+                align-items: center;
+                font-size: 14px;
+                gap: 3px;
+            }
         }
     }
 }
