@@ -1,4 +1,4 @@
-<div class="contain-form-input-email">
+<div class="input input-email">
     <label [for]="id" class="label">{{ label }}</label>
     <div class="form-input">
       <input 
@@ -8,10 +8,7 @@
         [placeholder]="placeholder"
         [id]="id" 
         [class]="inputClass" 
-        (ngModelChange)="this.emailChange.emit(this.email)" 
-        nbInput 
-        fullWidth
-        (keyup.enter)="this.enterPressed.emit()" />
+        (ngModelChange)="this.emailChange.emit(this.email)" />
     </div>
   </div>
   

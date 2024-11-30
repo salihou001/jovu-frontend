@@ -16,7 +16,6 @@ export class InputEmailComponent {
   @Input() label: string = '';
   @Input() placeholder: string = '';
   @Input() inputClass: string = 'form-control';
-  @Output() enterPressed = new EventEmitter<void>();
 
   // Regex pour valider l'email
   emailPattern: string = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
@@ -28,6 +27,8 @@ export class InputEmailComponent {
     if (this.isValidEmail(currentValue)) {
       // Si l'email est valide, émettre l'événement de changement
       this.emailChange.emit(currentValue);
+    }else {
+      console.log("bad email");
     }
   }
 

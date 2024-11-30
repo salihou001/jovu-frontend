@@ -1,8 +1,12 @@
-<div class="contain-form-input-text">
+<div class="input">
     <label [for]="id" class="label">{{ label }}</label>
     <div class="form-input">
-        <input type="text" [(ngModel)]="text" (input)="onInputChange($event)" [placeholder]="placeholder"
-            [id]="id" [class]="inputClass" (ngModelChange)="this.textChange.emit(this.text)" nbInput fullWidth
-            (keyup.enter)="this.enterPressed.emit()" />
+        <input type="text" 
+        [(ngModel)]="text" 
+        (input)="onInputChange($event)" 
+        [placeholder]="placeholder"
+        [id]="id" 
+        [class]="inputClass" 
+        (ngModelChange)="this.textChange.emit(this.text)"/>
     </div>
 </div>
