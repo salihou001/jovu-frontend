@@ -22,8 +22,8 @@
             <div class="wrapper-activity" cdkDropListGroup>
                 <!-- start todo -->
                 <div class="todo-list">
-                    <app-task-status></app-task-status>
-                    <app-add-task></app-add-task>
+                    <app-task-status [tasks]="tasks" [activityTpe]="'TO DO'" [activityColor]="'#f97316'"></app-task-status>
+                    <app-add-task [(showModal)]="showModal"></app-add-task>
 
                     <div class="box-list" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="tasks">
                         @if(tasks.length === 0) {
@@ -44,7 +44,7 @@
 
                 <!-- start todo -->
                 <div class="todo-list">
-                    <app-task-status></app-task-status>
+                  <app-task-status [tasks]="tasks1" [activityTpe]="'in Progress'" [activityColor]="'#0ea5e9'"></app-task-status>
                     <app-add-task></app-add-task>
                     <div class="box-list" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="tasks1">
                         @if(tasks1.length === 0) {
@@ -65,7 +65,7 @@
                 
                 <!-- start todo -->
                 <div class="todo-list">
-                    <app-task-status></app-task-status>
+                  <app-task-status [tasks]="tasks2" [activityTpe]="'Need Review'" [activityColor]="'#fbbf24'"></app-task-status>
                     <app-add-task></app-add-task>
                     <div class="box-list" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="tasks2">
                         @if(tasks2.length === 0) {
@@ -85,7 +85,7 @@
                 <!-- start todo -->
                  <!-- start todo -->
                 <div class="todo-list">
-                    <app-task-status></app-task-status>
+                  <app-task-status [tasks]="tasks3" [activityTpe]="'Done'" [activityColor]="'#22c55e'"></app-task-status>
                     <app-add-task></app-add-task>
                     <div class="box-list" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="tasks3">
                         @if(tasks3.length === 0) {
@@ -108,8 +108,6 @@
     <!-- end body -->
 </div>
 
-
-<!-- <button (click)="showModal = true">Ouvrir la modal</button> -->
 
 @if(showModal) {
   <app-modal

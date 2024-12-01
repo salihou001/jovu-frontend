@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { Task } from '../../models/task.model';
 
 @Component({
   selector: 'app-task-status',
@@ -9,5 +10,7 @@ import { Component } from '@angular/core';
   styleUrl: './task-status.component.scss'
 })
 export class TaskStatusComponent {
-
+  tasks = input.required<string[]>();
+  activityTpe = input.required<string>();
+  activityColor = input.required<string>();
 }
