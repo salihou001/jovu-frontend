@@ -1,0 +1,16 @@
+<div class="modal-overlay" (click)="close()">
+    <div class="modal-container" (click)="stopPropagation($event)">
+      <div class="modal-header">
+        <h2>{{ title }}</h2>
+        <button class="close-btn" (click)="close()">×</button>
+      </div>
+      <div class="modal-body">
+        <p>{{ content }}</p>
+        <ng-content></ng-content>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" (click)="close()">Fermer</button>
+      </div>
+    </div>
+  </div>
+  

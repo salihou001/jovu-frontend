@@ -107,3 +107,14 @@
      </div>
     <!-- end body -->
 </div>
+
+
+<button (click)="showModal = true">Ouvrir la modal</button>
+
+@if(showModal) {
+  <app-modal
+    [title]="'Bienvenue dans la modal !'"
+    [content]="'Ceci est une modal personnalisée.'"
+    (closeModal)="onModalClose()">
+  </app-modal>
+}

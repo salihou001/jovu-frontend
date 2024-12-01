@@ -4,16 +4,18 @@ import { TaskStatusComponent } from "../../shared/components/task-status/task-st
 import { AddTaskComponent } from "../../shared/components/add-task/add-task.component";
 import { DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ModalComponent } from '../../shared/components/modal/modal.component';
 
 @Component({
   selector: 'app-activity',
   standalone: true,
-  imports: [BoxTaskComponent, TaskStatusComponent, AddTaskComponent, DragDropModule],
+  imports: [BoxTaskComponent, TaskStatusComponent, AddTaskComponent, DragDropModule, ModalComponent],
   templateUrl: './activity.component.html',
   styleUrl: './activity.component.scss'
 })
 export class ActivityComponent {
 
+  showModal: boolean = false;
   tasks = ['Tâche 1', 'Tâche 2', 'Tâche 3', 'Tâche 4'];
   tasks1 = ['Tâche 1', 'Tâche 2'];
   tasks2 = ['Tâche 1', 'Tâche 2', 'Tâche 3'];
@@ -32,6 +34,9 @@ export class ActivityComponent {
                         event.previousIndex,
                         event.currentIndex);
     }
+  }
+  onModalClose() {
+    this.showModal = false;
   }
   
 }
