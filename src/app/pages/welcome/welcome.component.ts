@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { StorageService } from '../../shared/services/storage.service';
 
 @Component({
   selector: 'app-welcome',
@@ -8,6 +9,11 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.scss'
 })
-export class WelcomeComponent {
+export class WelcomeComponent implements OnInit {
 
-}
+  private router: Router = inject(Router);
+  private storageSrv: StorageService = inject(StorageService);
+  ngOnInit(): void {
+    if(this.storageSrv.hasToken()) this.router.navigate(['activity']);
+  }
+} 
