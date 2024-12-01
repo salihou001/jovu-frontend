@@ -55,10 +55,9 @@
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: 1fr;
-        gap: 8px;
 
         .todo-list {
-            padding: 1em .3em .3em 2em;
+            padding: 1em .3em .5em 1em;
         }
 
         .box-list {
@@ -96,3 +95,7 @@
     min-height: 60px;
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
   }
+
+.placeholder {
+
+}

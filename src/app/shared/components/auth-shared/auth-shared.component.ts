@@ -7,6 +7,7 @@ import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CommonService } from "../../services/common.service";
+import { StorageService } from "../../services/storage.service";
 
 @Component({
   selector: 'app-auth-shared',
@@ -21,6 +22,7 @@ export class AuthSharedComponent {
   private AuthSrv: AuthService = inject(AuthService);
   private toastr: ToastrService = inject(ToastrService);
   private loaderSrv: LoaderService = inject(LoaderService);
+  private storageSrv: StorageService = inject(StorageService);
   private commonSrv: CommonService = inject(CommonService);
 
   isSignUp = input.required<boolean>();
@@ -52,7 +54,8 @@ export class AuthSharedComponent {
   async login(email: string, password: string) {
     try {
       this.loaderSrv.show();
-      await this.AuthSrv.login(email, password);
+      const token = await this.AuthSrv.login(email, password);
+      this.storageSrv.storeToken(token);
       this.resetForm();
       this.toastr.success('Connexion réussie !', 'Succès');
       this.router.navigate(['activity']);

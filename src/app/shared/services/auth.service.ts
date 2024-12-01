@@ -1,5 +1,5 @@
 import { Auth, UserCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
-import { Firestore, doc, getDoc, setDoc } from '@angular/fire/firestore';
+import { DocumentData, Firestore, doc, getDoc, setDoc } from '@angular/fire/firestore';
 import { Injectable, inject } from '@angular/core';
 import * as bcrypt from 'bcryptjs';
 
@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   // *** CONNEXION UTILISATEUR ***
-  async login(email: string, password: string): Promise<void> {
+  async login(email: string, password: string): Promise<DocumentData> {
     try {
       // Connexion via Firebase Authentication
       const userCredential: UserCredential = await signInWithEmailAndPassword(this.auth, email, password);
@@ -52,6 +52,7 @@ export class AuthService {
       const hashedPassword = userData?.['hashedPassword'];
       // Vérifie si le mot de passe fourni correspond au mot de passe haché
       if (!bcrypt.compareSync(password, hashedPassword)) { throw 'IncorrectPassword'; }
+      return userData;
     } catch (error) { throw error; }
   }
 
