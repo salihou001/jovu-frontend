@@ -1,11 +1,12 @@
-import { AuthService } from './../../services/auth.service';
 import { InputPasswordComponent } from "../input-password/input-password.component";
 import { InputEmailComponent } from "../input-email/input-email.component";
-import { Component, inject, input } from '@angular/core';
-import { Router } from '@angular/router';
 import { InputTextComponent } from "../input-text/input-text.component";
-import { ToastrService } from 'ngx-toastr';
 import { LoaderService } from '../../services/loader.service';
+import { Component, inject, input } from '@angular/core';
+import { AuthService } from './../../services/auth.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { CommonService } from "../../services/common.service";
 
 @Component({
   selector: 'app-auth-shared',
@@ -20,6 +21,7 @@ export class AuthSharedComponent {
   private AuthSrv: AuthService = inject(AuthService);
   private toastr: ToastrService = inject(ToastrService);
   private loaderSrv: LoaderService = inject(LoaderService);
+  private commonSrv: CommonService = inject(CommonService);
 
   isSignUp = input.required<boolean>();
 
@@ -34,17 +36,16 @@ export class AuthSharedComponent {
   async register(email: string, password: string, confirmPassword: string, displayName: string) {
     try {
       this.loaderSrv.show();
+      if (!this.isValidEmail(this.email)) throw 'BadEmail';
       await this.AuthSrv.register(email, password, confirmPassword, displayName);
       this.resetForm();
-      this.toastr.success('Inscription réussie !', 'Succès', {
-        timeOut: 5000,
-        closeButton: true,
-        progressBar: true,
-      });
+      this.toastr.success('Inscription réussie !', 'Succès');
       this.router.navigate(['welcome/sign-in']);
     } catch (error) {
-      this.toastr.error('Erreur lors de l\'inscription', 'Erreur');
-      console.log(error);
+      (error === 'BadEmail') && this.toastr.error('Adresse email invalide', 'Erreur');
+      (error === 'PasswordDontMatch') && this.toastr.error('Les mots de passe ne correspondent pas', 'Erreur');
+      (error === 'IncorrectPassword') && this.toastr.error('Mot de passe/email incorrect', 'Erreur');
+      (error instanceof Error) && this.commonSrv.handleError(error);
     } finally { this.loaderSrv.hide(); }
   }
 
@@ -53,22 +54,20 @@ export class AuthSharedComponent {
       this.loaderSrv.show();
       await this.AuthSrv.login(email, password);
       this.resetForm();
-      this.toastr.success('Connexion réussie !', 'Succès', {
-        timeOut: 5000,
-        closeButton: true,
-        progressBar: true,
-      });
+      this.toastr.success('Connexion réussie !', 'Succès');
       this.router.navigate(['activity']);
     } catch (error) {
-      this.toastr.error('Erreur lors de la connexion', 'Erreur', {
-        timeOut: 5000,
-        closeButton: true,
-        progressBar: true,
-      });
-      console.log(error);
-    } finally { this.loaderSrv.hide();}
+      (error === 'UserNotFound') && this.toastr.error('Compte introuvable', 'Erreur');
+      (error === 'IncorrectPassword') && this.toastr.error('Mot de passe/email incorrect', 'Erreur');
+      (error instanceof Error) && this.commonSrv.handleError(error);
+    } finally { this.loaderSrv.hide(); }
   }
 
   //*** reset form  */
   resetForm = () => [this.email, this.password, this.displayName, this.confirmPassword] = ['', '', '', ''];
+  // Fonction de validation d'email
+    isValidEmail(email: string): boolean {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+  }
 }
