@@ -18,8 +18,8 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(), // Nécessaire pour ngx-toastr
     importProvidersFrom(
       ToastrModule.forRoot({
-        timeOut: 3000, // Durée d'affichage du toast (en ms)
-        positionClass: 'toast-top-right',
+        timeOut: 5000, // Durée d'affichage du toast (en ms)
+        positionClass: 'toast-bottom-right',
         preventDuplicates: true, // Évite les doublons
       })
     ),
