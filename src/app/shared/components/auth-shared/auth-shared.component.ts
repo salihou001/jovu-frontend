@@ -60,10 +60,9 @@ export class AuthSharedComponent {
       this.toastr.success('Connexion réussie !', 'Succès');
       this.router.navigate(['activity']);
     } catch (error) {
-      console.log("capturer",error);
       (error === 'UserNotFound') && this.toastr.error('Compte introuvable', 'Erreur');
       (error === 'IncorrectPassword') && this.toastr.error('Mot de passe/email incorrect', 'Erreur');
-      (error instanceof Error) && this.commonSrv.handleError(error, "Identifiant/mot de passe incorrect");
+      (error instanceof Error) && this.commonSrv.handleError(error);
     } finally { this.loaderSrv.hide(); }
   }
 
