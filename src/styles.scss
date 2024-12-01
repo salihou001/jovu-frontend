@@ -58,3 +58,27 @@ video {
 .input:hover {
     border-color: #6161FF;
 }
+
+
+/*** toast error manageme  **/
+.toast-container {
+    position: fixed !important;
+    /* Remplace relative par fixed pour qu'il ne déplace pas d'autres éléments */
+    z-index: 1050;
+    /* Assurez-vous qu'il soit devant les autres éléments */
+}
+
+.toast-bottom-right {
+    bottom: 20px;
+    right: 20px;
+}
+
+.toast-top-right {
+    top: 20px;
+    right: 20px;
+}
+
+.toast {
+    margin-bottom: 15px;
+    /* Espacement entre les toasts empilés */
+}

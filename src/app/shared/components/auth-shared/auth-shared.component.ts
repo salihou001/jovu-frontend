@@ -4,6 +4,7 @@ import { InputEmailComponent } from "../input-email/input-email.component";
 import { Component, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { InputTextComponent } from "../input-text/input-text.component";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-auth-shared',
@@ -16,6 +17,7 @@ export class AuthSharedComponent {
 
   private router: Router = inject(Router);
   private AuthSrv: AuthService = inject(AuthService);
+  private toastr: ToastrService = inject(ToastrService);
 
   isSignUp = input.required<boolean>();
 
@@ -32,20 +34,37 @@ export class AuthSharedComponent {
       this.isLoading = true;
       await this.AuthSrv.register(email, password, confirmPassword, displayName);
       this.resetForm();
+      this.toastr.success('Inscription réussie !', 'Succès', {
+        timeOut: 5000,
+        closeButton: true,
+        progressBar: true,
+      });
       this.router.navigate(['welcome/sign-in']);
     } catch (error) {
+      this.toastr.error('Erreur lors de l\'inscription', 'Erreur');
       console.log(error);
-    }finally { this.isLoading = false; }
+    } finally { this.isLoading = false; }
   }
 
   async login(email: string, password: string) {
     try {
-      this.isLoading = true; 
+      this.isLoading = true;
       await this.AuthSrv.login(email, password);
       this.resetForm();
-    } catch (error) { 
-      console.log(error); 
-    }finally { this.isLoading = false; }
+      this.toastr.success('Connexion réussie !', 'Succès', {
+        timeOut: 5000,
+        closeButton: true,
+        progressBar: true,
+      });
+      this.router.navigate(['activity']);
+    } catch (error) {
+      this.toastr.error('Erreur lors de la connexion', 'Erreur', {
+        timeOut: 5000,
+        closeButton: true,
+        progressBar: true,
+      });
+      console.log(error);
+    } finally { this.isLoading = false; }
   }
 
   //*** reset form  */
