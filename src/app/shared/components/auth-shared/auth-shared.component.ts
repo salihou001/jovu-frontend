@@ -5,6 +5,7 @@ import { Component, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { InputTextComponent } from "../input-text/input-text.component";
 import { ToastrService } from 'ngx-toastr';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-auth-shared',
@@ -18,6 +19,7 @@ export class AuthSharedComponent {
   private router: Router = inject(Router);
   private AuthSrv: AuthService = inject(AuthService);
   private toastr: ToastrService = inject(ToastrService);
+  private loaderSrv: LoaderService = inject(LoaderService);
 
   isSignUp = input.required<boolean>();
 
@@ -31,7 +33,7 @@ export class AuthSharedComponent {
 
   async register(email: string, password: string, confirmPassword: string, displayName: string) {
     try {
-      this.isLoading = true;
+      this.loaderSrv.show();
       await this.AuthSrv.register(email, password, confirmPassword, displayName);
       this.resetForm();
       this.toastr.success('Inscription réussie !', 'Succès', {
@@ -43,12 +45,12 @@ export class AuthSharedComponent {
     } catch (error) {
       this.toastr.error('Erreur lors de l\'inscription', 'Erreur');
       console.log(error);
-    } finally { this.isLoading = false; }
+    } finally { this.loaderSrv.hide(); }
   }
 
   async login(email: string, password: string) {
     try {
-      this.isLoading = true;
+      this.loaderSrv.show();
       await this.AuthSrv.login(email, password);
       this.resetForm();
       this.toastr.success('Connexion réussie !', 'Succès', {
@@ -64,7 +66,7 @@ export class AuthSharedComponent {
         progressBar: true,
       });
       console.log(error);
-    } finally { this.isLoading = false; }
+    } finally { this.loaderSrv.hide();}
   }
 
   //*** reset form  */
