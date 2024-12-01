@@ -1,14 +1,22 @@
+@if (isLoading) {
+    <div class="loading-overlay">
+      <div class="spinner"></div>
+      <p>Chargement en cours...</p>
+    </div>
+  }
+  
 <div class="auth-shared-container">
     <h1>Welcome to Atlas Tech Corp Ltd</h1>
     <p>Get started now, it's free. No credit card needed.</p>
     <div class="form-groups">
         <div class="form-wrapper">
-            @defer () { <app-input-email [placeholder]="'Email@gmail.com'"></app-input-email> }
-            @defer () { <app-input-password [placeholder]="'Password'"></app-input-password> }
+            @defer () { <app-input-email [placeholder]="'Email@gmail.com'" [(email)]="email"></app-input-email> }
+            @defer () { <app-input-password [placeholder]="'Password'" [(password)]="password"></app-input-password> }
             @if(isSignUp()) {
-                @defer () { <app-input-password [placeholder]="'Confirm Password'"></app-input-password> }
+                @defer () { <app-input-password [placeholder]="'Confirm Password'" [(password)]="confirmPassword"></app-input-password> }
+                @defer () { <app-input-text [placeholder]="'Name'" [(text)]="displayName"></app-input-text> }
             }
-            <button class="signUpBtn">{{ isSignUp() ? 'S\'inscrire' : 'Connexion' }}</button>
+            <button class="signUpBtn" (click)="isSignUp() ? register(email, password, confirmPassword, displayName) : login(email, password)">{{ isSignUp() ? 'S\'inscrire' : 'Connexion' }}</button>
             <p>By continuing, you agree </p>
             <p>les <span class="condition">Terms of Use</span> and <span class="condition">Privacy Policy</span></p>
             <p class="login-btn">{{ isSignUp() ? 'You already have an account' : 'You don\'t have an account'}} ?  <span class="condition" (click)="goToLogin(isSignUp() ? true : false)">{{ isSignUp() ? 'Login' : 'Sign up'}}</span></p>
