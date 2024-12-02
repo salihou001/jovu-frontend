@@ -1,11 +1,11 @@
 import { CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, Input, InputSignal, input } from '@angular/core';
 import { TaskStatusComponent } from "../task-status/task-status.component";
 import { AddTaskComponent } from "../add-task/add-task.component";
 import { BoxTaskComponent } from "../box-task/box-task.component";
-import { CommonModule } from '@angular/common';
-import { Task } from '../../models/task.model';
 import { ModalComponent } from '../modal/modal.component';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { Task } from '../../models/task.model';
 
 @Component({
   selector: 'app-task-column',
@@ -34,9 +34,9 @@ export class TaskColumnComponent {
       );
     }
   }
-  setTypeOfTask(type: string) { this.typeOfTask = type; }
-  trackByIndex(index: number) { return index; }
-  onModalClose() {
-    this.showModal = false;
-  }
+  
+  trackByIndex = (index: number) => index;
+  onModalClose = () => this.showModal = false;
+  setTypeOfTask = (type: string) => this.typeOfTask = type;
+
 }

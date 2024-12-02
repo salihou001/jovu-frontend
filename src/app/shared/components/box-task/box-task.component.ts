@@ -10,14 +10,14 @@ import { NgStyle } from '@angular/common';
   styleUrl: './box-task.component.scss'
 })
 export class BoxTaskComponent {
-  @Input() task!: Task; // Liaison de la tâche
-  completedSubtasks: number = 0; // Nombre de sous-tâches terminées
-  totalSubtasks: number = 0; // Nombre total de sous-tâches
-  tagColor: string = '#f3f4f6'; // Couleur de l'étiquette par défaut
+  @Input() task!: Task; 
+  completedSubtasks: number = 0; 
+  totalSubtasks: number = 0; 
+  tagColor: string = '#f3f4f6'; 
 
   ngOnInit(): void {
     this.calculateSubtasks();
-    this.setTagColor(); // Définir la couleur de l'étiquette selon le label
+    this.setTagColor();
   }
 
   // Calculer le nombre de sous-tâches terminées et le total
