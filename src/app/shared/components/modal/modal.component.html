@@ -1,16 +1,62 @@
 <div class="modal-overlay" (click)="close()">
-    <div class="modal-container" (click)="stopPropagation($event)">
-      <div class="modal-header">
-        <h2>{{ title }}</h2>
-        <button class="close-btn" (click)="close()">×</button>
-      </div>
-      <div class="modal-body">
-        <p>{{ content }}</p>
-        <ng-content></ng-content>
-      </div>
-      <div class="modal-footer">
-        <button class="btn-primary" (click)="close()">Fermer</button>
-      </div>
+  <div class="modal-container" (click)="stopPropagation($event)">
+    <div class="modal-header">
+      <h2>Nouvelle Tâche {{ typeTask }}</h2>
+      <button class="close-btn" (click)="close()">×</button>
+    </div>
+
+    <div class="modal-body">
+      <form (ngSubmit)="createTask()">
+        <!-- Champ Titre -->
+        <div class="form-group">
+          <label for="taskTitle">Titre de la tâche</label>
+          <input type="text" id="taskTitle" [(ngModel)]="task.title" name="title" required />
+        </div>
+
+        <!-- Champ Description -->
+        <div class="form-group">
+          <label for="taskDescription">Description</label>
+          <textarea id="taskDescription" [(ngModel)]="task.description" name="description" rows="3" required></textarea>
+        </div>
+
+        <!-- Champ Date d'échéance -->
+        <div class="form-group">
+          <label for="dueDate">Date d'échéance</label>
+          <input type="date" id="dueDate" [(ngModel)]="task.dueDate" name="dueDate" />
+        </div>
+
+        <!-- Champ Priorité -->
+        <div class="form-group">
+          <label for="priority">Priorité</label>
+          <select id="priority" [(ngModel)]="task.priority" name="priority">
+            <option value="Low">Faible</option>
+            <option value="Medium">Moyenne</option>
+            <option value="High">Élevée</option>
+          </select>
+        </div>
+
+        <!-- Champ Statut -->
+        <div class="form-group">
+          <label for="status">Statut</label>
+          <select id="status" [(ngModel)]="task.status" name="status">
+            <option value="To Do">À faire</option>
+            <option value="In Progress">En cours</option>
+            <option value="Done">Terminé</option>
+          </select>
+        </div>
+
+        <!-- Champ Attribution (Utilisateur) -->
+        <div class="form-group">
+          <label for="assignee">Attribuer à</label>
+          <input type="text" id="assignee" [(ngModel)]="task.assignee" name="assignee" />
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-primary" (click)="createTask()">Créer</button>
+      <button class="btn-secondary" (click)="close()">Fermer</button>
     </div>
   </div>
-  
+</div>
+a

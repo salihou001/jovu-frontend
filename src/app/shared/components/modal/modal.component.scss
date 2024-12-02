@@ -1,4 +1,4 @@
-/* Fond d'overlay */
+/* Styles de l'overlay (fond de la modal) */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -6,73 +6,129 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
+    /* Fond semi-transparent */
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     z-index: 1000;
 }
 
 /* Conteneur de la modal */
 .modal-container {
-    background: white;
+    background: #fff;
+    /* Couleur de fond blanche */
     border-radius: 8px;
-    width: 400px;
-    max-width: 90%;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    /* Limite la hauteur maximale à 80% de la hauteur de l'écran */
+    display: flex;
+    flex-direction: column;
+    /* Pour organiser le header, body et footer */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    /* Cache les débordements horizontaux */
     animation: fadeIn 0.3s ease-in-out;
 }
 
-/* En-tête de la modal */
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-}
-
-/* Corps de la modal */
-.modal-body {
-    margin: 20px 0;
-}
-
-/* Pied de la modal */
-.modal-footer {
-    text-align: right;
-}
-
-/* Bouton de fermeture */
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.btn-primary {
-    background-color: #007bff;
-    border: none;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-}
-
-/* Animation d'apparition */
+/* Animation de la modal */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: scale(0.9);
+        transform: translateY(-20px);
     }
 
     to {
         opacity: 1;
-        transform: scale(1);
+        transform: translateY(0);
     }
+}
+
+/* En-tête de la modal */
+.modal-header {
+    background: #007bff;
+    /* Couleur principale */
+    color: #fff;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Corps de la modal */
+.modal-body {
+    padding: 1rem;
+    overflow-y: auto;
+    /* Scroll vertical en cas de débordement */
+    flex-grow: 1;
+    /* Permet à la body de prendre l'espace disponible */
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* Pied de la modal */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+    background: #f1f1f1;
+}
+
+.modal-footer button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-primary {
+    background: #007bff;
+    color: #fff;
+    margin-right: 0.5rem;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+}
+
+.btn-secondary {
+    background: #ccc;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background: #bbb;
 }

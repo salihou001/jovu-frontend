@@ -1,42 +1,22 @@
-import { Component } from '@angular/core';
-import { BoxTaskComponent } from '../../shared/components/box-task/box-task.component';
-import { TaskStatusComponent } from "../../shared/components/task-status/task-status.component";
-import { AddTaskComponent } from "../../shared/components/add-task/add-task.component";
+import { Component, OnInit, inject } from '@angular/core';
 import { DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
+import { mockColumns } from '../../shared/mock/column';
+import { TaskColumnComponent } from "../../shared/components/task-column/task-column.component";
 
 @Component({
   selector: 'app-activity',
   standalone: true,
-  imports: [BoxTaskComponent, TaskStatusComponent, AddTaskComponent, DragDropModule, ModalComponent],
+  imports: [DragDropModule, ModalComponent, TaskColumnComponent],
   templateUrl: './activity.component.html',
   styleUrl: './activity.component.scss'
 })
-export class ActivityComponent {
+export class ActivityComponent implements OnInit {
 
   showModal: boolean = false;
-  tasks = ['Tâche 1', 'Tâche 2', 'Tâche 3', 'Tâche 4'];
-  tasks1 = ['Tâche 1', 'Tâche 2'];
-  tasks2 = ['Tâche 1', 'Tâche 2', 'Tâche 3'];
-  tasks3 = ['Tâche 1', 'Tâche 2', 'Tâche 3', 'Tâche 4'];
-  onDrop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
-    console.log('Nouvel ordre des tâches :', this.tasks);
-  }
+  typeOfTask!: string;
+  items = mockColumns;
 
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
-    }
-  }
-  onModalClose() {
-    this.showModal = false;
-  }
-  
+  async ngOnInit(): Promise<void> {}
+
 }

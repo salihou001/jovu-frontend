@@ -10,7 +10,7 @@ import { Task } from '../../models/task.model';
   styleUrl: './task-status.component.scss'
 })
 export class TaskStatusComponent {
-  tasks = input.required<string[]>();
+  tasks = input.required<Task[]>();
   activityTpe = input.required<string>();
   activityColor = input.required<string>();
 }

@@ -1,6 +1,6 @@
+import { StorageService } from '../../shared/services/storage.service';
 import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { StorageService } from '../../shared/services/storage.service';
 
 @Component({
   selector: 'app-welcome',

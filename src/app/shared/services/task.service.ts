@@ -1,62 +1,42 @@
-import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, updateDoc } from '@angular/fire/firestore';
-import { Injectable, inject } from '@angular/core';
-import { Observable, lastValueFrom } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Task } from '../models/task.model';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  private collectionPath = 'tasks';
+  private taskCollection = this.firestore.collection<Task>('tasks');
 
-  private firestore : Firestore = inject(Firestore);
+  constructor(private firestore: AngularFirestore) {}
 
-  // *** CREATE : Ajouter une tâche ***
-  async addTask(task: Task): Promise<void> {
-    try {
-      const taskCollection = collection(this.firestore, this.collectionPath);
-      await addDoc(taskCollection, task);
-      console.log('Tâche ajoutée avec succès');
-    } catch (error) {
-      console.error('Erreur lors de l\'ajout de la tâche :', error);
-      throw error;
-    }
+  // Récupérer toutes les tâches
+  getTasks(): Observable<Task[]> {
+    return this.taskCollection.valueChanges({ idField: 'id' });
   }
 
-  // *** READ : Obtenir la liste des tâches ***
-  async getTasks(): Promise<Task[]> {
-    try {
-      const taskCollection = collection(this.firestore, this.collectionPath);
-      const tasks$: Observable<Task[]> = collectionData(taskCollection, { idField: 'id' }) as Observable<Task[]>;
-      return await lastValueFrom(tasks$); // Convertir l'observable en promesse et attendre le dernier résultat
-    } catch (error) {
-      console.error('Erreur lors de la récupération des tâches :', error);
-      throw error;
-    }
+  // Ajouter une nouvelle tâche
+  addTask(task: Task): Promise<void> {
+    const id = this.firestore.createId();
+    return this.taskCollection.doc(id).set({
+      ...task,
+      id: id,
+      createdAt: new Date(),
+    });
   }
 
-  // *** UPDATE : Mettre à jour une tâche ***
-  async updateTask(taskId: string, task: Partial<Task>): Promise<void> {
-    try {
-      const taskDoc = doc(this.firestore, `${this.collectionPath}/${taskId}`);
-      await updateDoc(taskDoc, task);
-      console.log('Tâche mise à jour avec succès');
-    } catch (error) {
-      console.error('Erreur lors de la mise à jour de la tâche :', error);
-      throw error;
-    }
+  // Mettre à jour une tâche existante
+  updateTask(task: Task): Promise<void> {
+    return this.taskCollection.doc(task.id).update({
+      ...task,
+      updatedAt: new Date(),
+    });
   }
 
-  // *** DELETE : Supprimer une tâche ***
-  async deleteTask(taskId: string): Promise<void> {
-    try {
-      const taskDoc = doc(this.firestore, `${this.collectionPath}/${taskId}`);
-      await deleteDoc(taskDoc);
-      console.log('Tâche supprimée avec succès');
-    } catch (error) {
-      console.error('Erreur lors de la suppression de la tâche :', error);
-      throw error;
-    }
+  // Supprimer une tâche
+  deleteTask(id: string): Promise<void> {
+    return this.taskCollection.doc(id).delete();
   }
 }

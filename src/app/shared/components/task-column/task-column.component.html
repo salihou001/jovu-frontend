@@ -1,0 +1,19 @@
+<div class="todo-list">
+    <app-task-status [tasks]="tasks" [activityTpe]="title" [activityColor]="color"></app-task-status>
+    <app-add-task [(showModal)]="showModal" [typeTask]="title" (typeOfTask)="setTypeOfTask($event)"></app-add-task>
+
+    <div class="box-list" cdkDropList (cdkDropListDropped)="onDrop($event)" [cdkDropListData]="tasks">
+        @if(tasks.length === 0) {
+        <div class="placeholder">
+            Glissez une tâche ici
+        </div>
+        }
+        @for (task of tasks; track $index) {
+        <div cdkDrag>
+            <app-box-task [task]="task"></app-box-task>
+        </div>
+        }
+    </div>
+</div>
+
+@if(showModal) {<app-modal  [content]="'Créer une nouvelle tâche'" [typeTask]="typeOfTask" (closeModal)="onModalClose()"></app-modal>}

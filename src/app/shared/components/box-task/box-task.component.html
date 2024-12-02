@@ -1,30 +1,38 @@
 <div class="box-task-con">
+    <!-- Header de la tâche -->
     <div class="box-task-header">
-        <div class="box-task-tag">UX stages</div>
-        <div class="box-task-icon"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></div>
-    </div>
-
-    <div class="box-task-body">
-        <h4>WireFraming</h4>
-        <p class="box-task-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        <div class="result">
-            <span><i class="fa fa-tasks" aria-hidden="true"></i></span>
-            <span>2/5</span>
+        <div class="box-task-tag" [ngStyle]="{ backgroundColor: tagColor }">
+            {{ task.label }}
+        </div>
+        <div class="box-task-icon">
+            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
         </div>
     </div>
+
+    <!-- Corps de la tâche -->
+    <div class="box-task-body">
+        <h4>{{ task.title }}</h4>
+        <p class="box-task-desc">{{ task.description }}</p>
+        <div class="result">
+            <span><i class="fa fa-tasks" aria-hidden="true"></i></span>
+            <span>{{ completedSubtasks }}/{{ totalSubtasks }}</span>
+        </div>
+    </div>
+
+    <!-- Pied de la tâche -->
     <div class="box-task-footer">
         <div class="box-task-footer__right">
             <div>
                 <span><i class="fa fa-eye" aria-hidden="true"></i></span>
-                <span>2</span>
+                <span>{{ task.views }}</span>
             </div>
             <div>
                 <span><i class="fa fa-comments" aria-hidden="true"></i></span>
-                <span>0</span>
+                <span>{{ task.comments?.length ?? 0 }}</span>
             </div>
             <div>
                 <span><i class="fa fa-paperclip" aria-hidden="true"></i></span>
-                <span>5</span>
+                <span>{{ task.attachments?.length ?? 0 }}</span>
             </div>
         </div>
     </div>

@@ -1,118 +1,28 @@
 <div class="activity-conainer">
+  <!-- start header -->
+  <header>
+    <div class="header-left">
+      <ul>
+        <li>Overview</li>
+        <li>Tasks</li>
+        <li>Notes</li>
+        <li>Questions</li>
+      </ul>
+    </div>
+    <div class="header-right">
+      <span><i class="fa fa-columns" aria-hidden="true"></i></span>
+      <span>Board</span>
+    </div>
+  </header>
+  <!-- end header -->
 
-    <!-- start header -->
-     <header>
-        <div class="header-left">
-            <ul>
-                <li>Overview</li>
-                <li>Tasks</li>
-                <li>Notes</li>
-                <li>Questions</li>
-            </ul>
-        </div>
-        <div class="header-right">
-            <span><i class="fa fa-columns" aria-hidden="true"></i></span>
-            <span>Board</span>
-        </div>
-     </header>
-    <!-- end header -->
-
-    <!-- start body -->
-     <div class="activity-body">
-            <div class="wrapper-activity" cdkDropListGroup>
-                <!-- start todo -->
-                <div class="todo-list">
-                    <app-task-status [tasks]="tasks" [activityTpe]="'TO DO'" [activityColor]="'#f97316'"></app-task-status>
-                    <app-add-task [(showModal)]="showModal"></app-add-task>
-
-                    <div class="box-list" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="tasks">
-                        @if(tasks.length === 0) {
-                            <div class="placeholder">
-                                Glissez une tâche ici
-                            </div>
-                        }
-                        @for (task of tasks; track $index) {
-                          @defer () { 
-                            <div cdkDrag>
-                              <app-box-task></app-box-task>
-                            </div>
-                          }
-                        }
-                      </div>
-                </div>
-                <!-- start todo -->
-
-                <!-- start todo -->
-                <div class="todo-list">
-                  <app-task-status [tasks]="tasks1" [activityTpe]="'in Progress'" [activityColor]="'#0ea5e9'"></app-task-status>
-                    <app-add-task></app-add-task>
-                    <div class="box-list" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="tasks1">
-                        @if(tasks1.length === 0) {
-                            <div class="placeholder">
-                                Glissez une tâche ici
-                            </div>
-                        }
-                        @for (task of tasks1; track $index) {
-                          @defer () { 
-                            <div cdkDrag>
-                              <app-box-task></app-box-task>
-                            </div>
-                          }
-                        }
-                      </div>
-                </div>
-                <!-- start todo -->
-                
-                <!-- start todo -->
-                <div class="todo-list">
-                  <app-task-status [tasks]="tasks2" [activityTpe]="'Need Review'" [activityColor]="'#fbbf24'"></app-task-status>
-                    <app-add-task></app-add-task>
-                    <div class="box-list" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="tasks2">
-                        @if(tasks2.length === 0) {
-                            <div class="placeholder">
-                                Glissez une tâche ici
-                            </div>
-                        }
-                        @for (task of tasks2; track $index) {
-                          @defer () { 
-                            <div class="example-box" cdkDrag>
-                              <app-box-task></app-box-task>
-                            </div>
-                          }
-                        }
-                      </div>
-                </div>
-                <!-- start todo -->
-                 <!-- start todo -->
-                <div class="todo-list">
-                  <app-task-status [tasks]="tasks3" [activityTpe]="'Done'" [activityColor]="'#22c55e'"></app-task-status>
-                    <app-add-task></app-add-task>
-                    <div class="box-list" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="tasks3">
-                        @if(tasks3.length === 0) {
-                            <div class="placeholder">
-                                Glissez une tâche ici
-                            </div>
-                        }
-                        @for (task of tasks3; track $index) {
-                          @defer () { 
-                            <div cdkDrag>
-                              <app-box-task></app-box-task>
-                            </div>
-                          }
-                        }
-                      </div>
-                </div>
-                <!-- start todo -->
-            </div>
-     </div>
-    <!-- end body -->
+  <!-- start body -->
+  <div class="activity-body">
+    <div class="wrapper-activity" cdkDropListGroup>
+    @for (item of items; track $index) {
+        <app-task-column [tasks]="item?.tasks ?? []" [title]="item.title" [color]="item.color"></app-task-column>
+      }
+    </div>
+  </div>
+  <!-- end body -->
 </div>
-
-
-@if(showModal) {
-  <app-modal
-    [title]="'Bienvenue dans la modal !'"
-    [content]="'Ceci est une modal personnalisée.'"
-    (closeModal)="onModalClose()">
-  </app-modal>
-}
