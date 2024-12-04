@@ -3,9 +3,7 @@
     border-radius: 5px;
     border: 1px solid #e2e8f0;
     cursor: move;
-    // -webkit-box-shadow: -3px -1px 20px 3px rgba(226, 232, 240, 1);
-    // -moz-box-shadow: -3px -1px 20px 3px rgba(226, 232, 240, 1);
-    // box-shadow: -3px -1px 20px 3px rgba(226, 232, 240, 1);
+    min-width: 100%;
 
     .box-task-header {
         display: flex;

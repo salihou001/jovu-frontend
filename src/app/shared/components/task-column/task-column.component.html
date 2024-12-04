@@ -5,7 +5,7 @@
     <div class="box-list" cdkDropList (cdkDropListDropped)="onDrop($event)" [cdkDropListData]="tasks">
         @if(tasks.length === 0) {
         <div class="placeholder">
-            Glissez une tâche ici
+            Drag here
         </div>
         }
         @for (task of tasks; track $index) {
@@ -16,4 +16,4 @@
     </div>
 </div>
 
-@if(showModal) {<app-modal  [content]="'Créer une nouvelle tâche'" [typeTask]="typeOfTask" (closeModal)="onModalClose()"></app-modal>}
+@if(showModal) {<app-modal  [content]="'Créer une nouvelle tâche'" [typeTask]="typeOfTask" (closeModal)="onModalClose()" [column]="column"></app-modal>}

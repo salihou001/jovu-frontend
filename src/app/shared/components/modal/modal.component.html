@@ -48,8 +48,28 @@
         <!-- Champ Attribution (Utilisateur) -->
         <div class="form-group">
           <label for="assignee">Attribuer à</label>
-          <input type="text" id="assignee" [(ngModel)]="task.assignee" name="assignee" />
+          <select id="assignee" [(ngModel)]="task.assignee" name="assignee">
+            @for (user of users; track $index) {
+            <option [value]="user.uid">{{ user.displayName }}</option>
+            }
+          </select>
         </div>
+
+        <div class="form-group">
+          <label>Sous-tâches</label>
+          <ul class="subtasks-list">
+            @for (subtask of task.subtasks; track $index; let i = $index) {
+            <li class="subtask-item">
+              <input type="checkbox" [(ngModel)]="subtask.completed" [name]="'subtaskCompleted' + i" />
+              <input type="text" [(ngModel)]="subtask.title" [name]="'subtaskTitle' + i"
+                placeholder="Titre de la sous-tâche" />
+              <button type="button" class="remove-btn" (click)="removeSubtask(i)">✕</button>
+            </li>
+            }
+          </ul>
+          <button type="button" class="add-subtask-btn" (click)="addSubtask()">+ Ajouter une sous-tâche</button>
+        </div>
+
       </form>
     </div>
 

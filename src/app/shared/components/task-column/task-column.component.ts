@@ -5,7 +5,7 @@ import { BoxTaskComponent } from "../box-task/box-task.component";
 import { ModalComponent } from '../modal/modal.component';
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Task } from '../../models/task.model';
+import { Column, Task } from '../../models/task.model';
 
 @Component({
   selector: 'app-task-column',
@@ -16,6 +16,7 @@ import { Task } from '../../models/task.model';
 })
 export class TaskColumnComponent {
   @Input() tasks!: Task[];
+  @Input() column!: Column;
   @Input() title!: string;
   @Input() color!: string;
 

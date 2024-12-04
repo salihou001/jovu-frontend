@@ -19,8 +19,8 @@
   <!-- start body -->
   <div class="activity-body">
     <div class="wrapper-activity" cdkDropListGroup>
-    @for (item of items; track $index) {
-        <app-task-column [tasks]="item?.tasks ?? []" [title]="item.title" [color]="item.color"></app-task-column>
+    @for (column of columns; track $index) {
+        <app-task-column [tasks]="column?.tasks ?? []" [title]="column.title" [color]="column.color" [column]="column"></app-task-column>
       }
     </div>
   </div>
