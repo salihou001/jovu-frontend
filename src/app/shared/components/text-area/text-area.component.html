@@ -1,0 +1,10 @@
+<div class="form-group">
+    <label [for]="id">{{ label }}</label>
+    <textarea
+      [(ngModel)]="text"
+      [id]="id"
+      [placeholder]="placeholder"
+      [rows]="rows"
+      (ngModelChange)="textChange.emit($event)"
+    ></textarea>
+</div>

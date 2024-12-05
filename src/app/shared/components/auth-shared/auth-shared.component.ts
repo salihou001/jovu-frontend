@@ -1,13 +1,13 @@
 import { InputPasswordComponent } from "../input-password/input-password.component";
 import { InputEmailComponent } from "../input-email/input-email.component";
 import { InputTextComponent } from "../input-text/input-text.component";
+import { CommonService } from "../../services/common.service";
+import { StorageService } from "../../services/storage.service";
 import { LoaderService } from '../../services/loader.service';
 import { Component, inject, input } from '@angular/core';
 import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { CommonService } from "../../services/common.service";
-import { StorageService } from "../../services/storage.service";
 
 @Component({
   selector: 'app-auth-shared',
@@ -41,12 +41,12 @@ export class AuthSharedComponent {
       if (!this.isValidEmail(this.email)) throw 'BadEmail';
       await this.AuthSrv.register(email, password, confirmPassword, displayName);
       this.resetForm();
-      this.toastr.success('Inscription réussie !', 'Succès');
+      this.toastr.success('Registrer Successfully !', 'Success');
       this.router.navigate(['welcome/sign-in']);
     } catch (error) {
-      (error === 'BadEmail') && this.toastr.error('Adresse email invalide', 'Erreur');
-      (error === 'PasswordDontMatch') && this.toastr.error('Les mots de passe ne correspondent pas', 'Erreur');
-      (error === 'IncorrectPassword') && this.toastr.error('Mot de passe/email incorrect', 'Erreur');
+      (error === 'BadEmail') && this.toastr.error('Invalid Email', 'Error');
+      (error === 'PasswordDontMatch') && this.toastr.error('password dont match', 'Error');
+      (error === 'IncorrectPassword') && this.toastr.error('Incorrect password or email', 'Error');
       (error instanceof Error) && this.commonSrv.handleError(error);
     } finally { this.loaderSrv.hide(); }
   }
@@ -54,21 +54,25 @@ export class AuthSharedComponent {
   async login(email: string, password: string) {
     try {
       this.loaderSrv.show();
+      if (!this.isValidEmail(this.email)) throw 'BadEmail';
+      if (!this.password) throw 'RequiredField';
       const token = await this.AuthSrv.login(email, password);
       this.storageSrv.storeToken(token);
       this.resetForm();
-      this.toastr.success('Connexion réussie !', 'Succès');
+      this.toastr.success('Connexion Successfully !', 'Success');
       this.router.navigate(['activity']);
     } catch (error) {
-      (error === 'UserNotFound') && this.toastr.error('Compte introuvable', 'Erreur');
-      (error === 'IncorrectPassword') && this.toastr.error('Mot de passe/email incorrect', 'Erreur');
+      (error === 'RequiredField') && this.toastr.error('Required Fields', 'Error');
+      (error === 'BadEmail') && this.toastr.error('Invalid Email', 'Error');
+      (error === 'UserNotFound') && this.toastr.error('Account Not Found', 'Error');
+      (error === 'IncorrectPassword') && this.toastr.error('Incorrect password or email', 'Error');
       (error instanceof Error) && this.commonSrv.handleError(error);
     } finally { this.loaderSrv.hide(); }
   }
 
   //*** reset form  */
   resetForm = () => [this.email, this.password, this.displayName, this.confirmPassword] = ['', '', '', ''];
-  // Fonction de validation d'email
+  // validated email
     isValidEmail(email: string): boolean {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);

@@ -1,0 +1,8 @@
+<div class="form-group">
+    <label [for]="id">{{ label }}</label>
+    <select [(ngModel)]="selected" [id]="id" (ngModelChange)="selectedChange.emit($event)">
+        @for (option of options; track $index) {
+        <option [value]="option.value || option.uid">{{ option.label || option.displayName }}</option>
+        }
+    </select>
+</div>

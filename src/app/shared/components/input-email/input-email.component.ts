@@ -6,20 +6,28 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './input-email.component.html',
-  styleUrl: './input-email.component.scss'
+  styleUrls: ['./input-email.component.scss']
 })
 export class InputEmailComponent {
   @Input() email: string = '';
   @Output() emailChange = new EventEmitter<string>();
 
-  @Input() id: string = ''; 
+  @Input() id: string = 'email-input';
   @Input() label: string = '';
-  @Input() placeholder: string = '';
-  @Input() inputClass: string = 'form-control';
+  @Input() placeholder: string = 'Enter your email';
 
-  // Regex pour valider l'email
-  emailPattern: string = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
-  // Méthode appelée lors de la saisie
-  onInputChange(): void { this.emailChange.emit(this.email); }
+  // Vérification de l'email valide ou non
+  get isEmailValid(): boolean {
+    const emailRegex = new RegExp(this.emailPattern);
+    return emailRegex.test(this.email);
+  }
 
+  // Regex pour valider les emails
+  emailPattern: string = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$';
+
+  // Émet la valeur uniquement quand elle change
+  onInputChange(newValue: string): void {
+    this.email = newValue;
+    this.emailChange.emit(newValue);
+  }
 }

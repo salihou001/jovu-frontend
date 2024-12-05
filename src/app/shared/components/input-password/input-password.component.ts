@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, WritableSignal, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -20,6 +20,6 @@ export class InputPasswordComponent {
   @Output() enterPressed = new EventEmitter<void>();
   
   showPassword: WritableSignal<boolean> = signal(false);
-
+  // toggle icon eye
   togglePasswordVisibility = () => this.showPassword.set(!this.showPassword());
 }

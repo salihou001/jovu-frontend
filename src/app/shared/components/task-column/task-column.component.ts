@@ -4,8 +4,8 @@ import { AddTaskComponent } from "../add-task/add-task.component";
 import { BoxTaskComponent } from "../box-task/box-task.component";
 import { ModalComponent } from '../modal/modal.component';
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
 import { Column, Task } from '../../models/task.model';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-task-column',
@@ -18,7 +18,7 @@ export class TaskColumnComponent {
   @Input() tasks!: Task[];
   @Input() column!: Column;
   @Input() title!: string;
-  @Input() color!: string;
+  @Input() color: string | undefined = '#fcfcfc';
 
   showModal: boolean = false;
   typeOfTask!: string;

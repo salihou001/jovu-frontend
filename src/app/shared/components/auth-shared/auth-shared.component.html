@@ -11,12 +11,14 @@
             @defer () { <app-input-text [placeholder]="'Name'" [(text)]="displayName"></app-input-text> }
             }
             <button class="signUpBtn"
-                (click)="isSignUp() ? register(email, password, confirmPassword, displayName) : login(email, password)">{{
-                isSignUp() ? 'S\'inscrire' : 'Connexion' }}</button>
+                (click)="isSignUp() ? register(email, password, confirmPassword, displayName) : login(email, password)">
+                {{ isSignUp() ? 'Sign Up' : 'Sign In' }}
+            </button>
             <p>By continuing, you agree </p>
             <p>les <span class="condition">Terms of Use</span> and <span class="condition">Privacy Policy</span></p>
-            <p class="login-btn">{{ isSignUp() ? 'You already have an account' : 'You don\'t have an account'}} ? <span
-                    class="condition" (click)="goToLogin(isSignUp() ? true : false)">{{ isSignUp() ? 'Login' : 'Sign up'}}</span></p>
+            <p class="login-btn">{{ isSignUp() ? 'You already have an account' : 'You don\'t have an account'}} ? 
+                <span class="condition" (click)="goToLogin(isSignUp() ? true : false)">{{ isSignUp() ? 'Login' : 'Sign up'}}</span>
+            </p>
         </div>
     </div>
 </div>

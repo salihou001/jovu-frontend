@@ -1,6 +1,6 @@
 .activity-conainer {
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
 
     header {
         background: #fff;
@@ -60,5 +60,20 @@
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: 1fr;
         gap: 10px;
+
+        /* 3 colonnes pour les tablettes en orientation paysage */
+        @media (max-width: 1024px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* 2 colonnes pour les tablettes en portrait */
+        @media (max-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        /* 1 colonne pour les petits écrans (smartphones) */
+        @media (max-width: 480px) {
+            grid-template-columns: 1fr;
+        }
     }
 }

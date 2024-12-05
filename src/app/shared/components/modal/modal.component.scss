@@ -1,4 +1,4 @@
-/* Styles de l'overlay (fond de la modal) */
+/* Styles of modal */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -6,32 +6,26 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    /* Fond semi-transparent */
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
 }
 
-/* Conteneur de la modal */
 .modal-container {
     background: #fff;
-    /* Couleur de fond blanche */
     border-radius: 8px;
     width: 90%;
     max-width: 500px;
     max-height: 80vh;
-    /* Limite la hauteur maximale à 80% de la hauteur de l'écran */
     display: flex;
     flex-direction: column;
-    /* Pour organiser le header, body et footer */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    /* Cache les débordements horizontaux */
     animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Animation de la modal */
+/* Animation of modal */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -44,10 +38,8 @@
     }
 }
 
-/* En-tête de la modal */
 .modal-header {
     background: #007bff;
-    /* Couleur principale */
     color: #fff;
     padding: 1rem;
     display: flex;
@@ -66,92 +58,4 @@
     color: #fff;
     font-size: 1.5rem;
     cursor: pointer;
-}
-
-/* Corps de la modal */
-.modal-body {
-    padding: 1rem;
-    overflow-y: auto;
-    /* Scroll vertical en cas de débordement */
-    flex-grow: 1;
-    /* Permet à la body de prendre l'espace disponible */
-}
-
-.form-group {
-    margin-bottom: 1rem;
-}
-
-.form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-/* Pied de la modal */
-.modal-footer {
-    display: flex;
-    justify-content: flex-end;
-    padding: 1rem;
-    background: #f1f1f1;
-}
-
-.modal-footer button {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.btn-primary {
-    background: #007bff;
-    color: #fff;
-    margin-right: 0.5rem;
-}
-
-.btn-primary:hover {
-    background: #0056b3;
-}
-
-.btn-secondary {
-    background: #ccc;
-    color: #333;
-}
-
-.btn-secondary:hover {
-    background: #bbb;
-}
-
-li {
-    list-style: none;
-}
-
-.subtask-item {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    gap: 3px;
-}
-
-.remove-btn {
-    height: 16px;
-    width: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    border-radius: 3px;
 }

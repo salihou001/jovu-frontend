@@ -1,14 +1,21 @@
 <div class="input input-email">
-    <label [for]="id" class="label">{{ label }}</label>
-    <div class="form-input">
-      <input 
-        type="email" 
-        [(ngModel)]="email" 
-        (input)="onInputChange()" 
-        [placeholder]="placeholder"
-        [id]="id" 
-        [class]="inputClass" 
-        (ngModelChange)="this.emailChange.emit(this.email)" />
-    </div>
+  <label [for]="id" class="label">{{ label }}</label>
+  <div class="form-input">
+    <input 
+      type="email"
+      [id]="id"
+      [(ngModel)]="email"
+      (ngModelChange)="onInputChange($event)"
+      [placeholder]="placeholder"
+      [pattern]="emailPattern"
+      required
+    />
+
+    <!-- Gestion des messages d'erreur -->
+     @if (!isEmailValid && email) {
+       <div  class="error-message">
+         Please enter a valid email address.
+       </div>
+     }
   </div>
-  
+</div>

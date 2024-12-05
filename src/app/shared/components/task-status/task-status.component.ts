@@ -12,5 +12,5 @@ import { Task } from '../../models/task.model';
 export class TaskStatusComponent {
   tasks = input.required<Task[]>();
   activityTpe = input.required<string>();
-  activityColor = input.required<string>();
+  activityColor = input.required<string | undefined>();
 }

@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './input-text.component.scss'
 })
 export class InputTextComponent {
-  @Input() text: string = '';
+  @Input() text: string | undefined = '';
   @Output() textChange = new EventEmitter<string>();
 
   @Input() id: string = ''; 
@@ -18,17 +18,14 @@ export class InputTextComponent {
   @Input() inputClass: string = 'form-control';
   @Output() enterPressed = new EventEmitter<void>();
 
-  textPattern: RegExp = /^[a-zA-Z0-9]*$/;
+  textPattern: RegExp = /^[a-zA-Z0-9 ]*$/;
 
-  onInputChange(event: any): void {
+  onInputChange(): void {
     const currentValue = this.text;
-    // Appliquer la regex pour garder seulement les caractères alphanumériques
-    const sanitizedValue = currentValue.replace(/[^a-zA-Z0-9]/g, '');
-    
-    // Mettre à jour la valeur du mot de passe avec les caractères valides uniquement
+    // control alpha numeric value
+    const sanitizedValue = currentValue?.replace(/[^a-zA-Z0-9 ]/g, '');
     this.text = sanitizedValue;
-
-    // Émettre l'événement de changement de mot de passe
+    // emit text value on input
     this.textChange.emit(this.text);
   }
 

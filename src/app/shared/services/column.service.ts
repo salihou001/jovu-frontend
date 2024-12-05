@@ -86,7 +86,6 @@ export class ColumnService {
   // *** METTRE À JOUR UNE COLONNE EXISTANTE ***
   async updateColumn(column: Column): Promise<void> {
     try {
-      debugger;
       if (!column.id) {
         throw new Error("L'ID de la colonne est requis pour la mise à jour.");
       }

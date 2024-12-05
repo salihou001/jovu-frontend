@@ -20,7 +20,7 @@
   <div class="activity-body">
     <div class="wrapper-activity" cdkDropListGroup>
     @for (column of columns; track $index) {
-        <app-task-column [tasks]="column?.tasks ?? []" [title]="column.title" [color]="column.color" [column]="column"></app-task-column>
+        @defer () { <app-task-column [tasks]="column?.tasks ?? []" [title]="column.title" [color]="column.color" [column]="column"></app-task-column> }
       }
     </div>
   </div>

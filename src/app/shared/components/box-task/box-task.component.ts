@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, WritableSignal, signal } from '@angular/core';
 import { Task } from '../../models/task.model';
 import { NgStyle } from '@angular/common';
 
@@ -10,10 +10,10 @@ import { NgStyle } from '@angular/common';
   styleUrl: './box-task.component.scss'
 })
 export class BoxTaskComponent {
-  @Input() task!: Task; 
-  completedSubtasks: number = 0; 
-  totalSubtasks: number = 0; 
-  tagColor: string = '#f3f4f6'; 
+  @Input() task!: Task;
+  completedSubtasks: WritableSignal<number> = signal(0);
+  totalSubtasks: WritableSignal<number> = signal(0);
+  tagColor: string = '#f3f4f6';
 
   ngOnInit(): void {
     this.calculateSubtasks();
@@ -23,8 +23,8 @@ export class BoxTaskComponent {
   // Calculer le nombre de sous-tâches terminées et le total
   private calculateSubtasks(): void {
     if (this.task.subtasks) {
-      this.completedSubtasks = this.task.subtasks.filter((subtask) => subtask.completed).length;
-      this.totalSubtasks = this.task.subtasks.length;
+      this.completedSubtasks.set(this.task.subtasks.filter((subtask) => subtask.completed).length);
+      this.totalSubtasks.set(this.task.subtasks.length);
     }
   }
 

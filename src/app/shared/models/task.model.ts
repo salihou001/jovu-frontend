@@ -31,5 +31,5 @@ export interface Column {
     id?: string;
     title: 'To Do' | 'In Progress' | 'Need Review' | 'Done'; 
     tasks: Task[];
-    color: string;
+    color?: string;
 }

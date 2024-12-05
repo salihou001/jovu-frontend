@@ -1,30 +1,34 @@
+import { SubTaskListComponent } from "../sub-task-list/sub-task-list.component";
+import { InputTextComponent } from "../input-text/input-text.component";
+import { TextAreaComponent } from "../text-area/text-area.component";
+import { Firestore, collection, getDocs } from '@angular/fire/firestore';
+import { SelectComponent } from "../select/select.component";
+import { ColumnService } from '../../services/column.service';
 import { EventEmitter, OnInit, inject } from '@angular/core';
-import { Output } from '@angular/core';
-import { Input } from '@angular/core';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { DateComponent } from "../date/date.component";
 import { LoaderService } from '../../services/loader.service';
 import { Column, Task } from '../../models/task.model';
-import { Firestore, collection, getDocs } from '@angular/fire/firestore';
+import { FormsModule } from '@angular/forms';
 import { User } from '../../models/user.model';
-import { ColumnService } from '../../services/column.service';
+import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { Output } from '@angular/core';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, InputTextComponent, TextAreaComponent, DateComponent, SelectComponent, SubTaskListComponent],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss'
 })
 export class ModalComponent implements OnInit {
   @Input() typeTask!: string;
   @Input() column!: Column;
-  @Input() content: string = 'Contenu de la modal';
+  @Input() content: string = '';
 
   @Output() closeModal = new EventEmitter<void>();
 
-  firestore: Firestore = inject(Firestore);
   users!: Partial<User>[];
   task: Partial<Task> = {
     title: '',
@@ -32,12 +36,31 @@ export class ModalComponent implements OnInit {
     dueDate: new Date(),
     priority: 'Medium',
     status: 'To Do',
-    assignee: '' // Utilisateur assigné
-  };;
+    assignee: '' ,
+    subtasks: []
+  };
 
-  async ngOnInit(): Promise<void> {
-    await this.loadUsers(); // Charger les utilisateurs lors du démarrage
-  }
+  // Options priorities
+  priorityOptions = [
+    { value: 'Low', label: 'Low' },
+    { value: 'Medium', label: 'Medium' },
+    { value: 'High', label: 'High' }
+  ];
+
+  // Options status
+  statusOptions = [
+    { value: 'To Do', label: 'To Do' },
+    { value: 'In Progress', label: 'In Progress' },
+    { value: 'In Review', label: 'In Review' },
+    { value: 'Done', label: 'Terminé' }
+  ];
+  
+  private firestore: Firestore = inject(Firestore);
+  private toastSrv: ToastrService = inject(ToastrService);
+  private loaderSrv: LoaderService = inject(LoaderService);
+  private columnService: ColumnService = inject(ColumnService);
+
+  async ngOnInit(): Promise<void> { await this.loadUsers(); }
 
   async loadUsers(): Promise<void> {
     try {
@@ -48,51 +71,32 @@ export class ModalComponent implements OnInit {
         displayName: doc.data()['displayName']
       }));
     } catch (error) {
-      console.error('Erreur lors de la récupération des utilisateurs :', error);
+      this.toastSrv.error('Verify your internet connexion :'); return;
     }
   }
   
-  
-  private columnService: ColumnService = inject(ColumnService);
-  private toastSrv: ToastrService = inject(ToastrService);
-  private loaderSrv: LoaderService = inject(LoaderService);
-
-  close() {
-    this.closeModal.emit();
-  }
-
-  stopPropagation(event: Event) {
-    event.stopPropagation();
-  }
+  close = () => this.closeModal.emit(); 
+  stopPropagation = (event: Event) => event.stopPropagation();
 
   async createTask() {
     try {
       this.loaderSrv.show();
-      if (!this.task.title || !this.task.description) {
-        this.toastSrv.error('Veuillez remplir tous les champs requis.');
-        return;
-      }
-      console.log("task", this.task);
-      console.log("column", this.column);
+      if (!this.task.title || !this.task.description) { this.toastSrv.error('Fields are required.');return; }
       if(!this.column.tasks) { this.column.tasks = [] }
       this.column.tasks.push(this.task as any);
       await this.columnService.updateColumn(this.column);
-      this.toastSrv.success('Tâche créée avec succès !');
+      this.toastSrv.success('New task created successfully !');
       this.close();
       await this.loadUsers();
     } catch (error) {
-      console.error('Erreur lors de la création de la tâche :', error);
+      this.toastSrv.error('Error during creation of new task !');
     }finally { this.loaderSrv.hide(); }
   }
 
   addSubtask() {
-    if (!this.task?.subtasks) {
-      this.task.subtasks = [];
-    }
+    this.task.subtasks ??= [];
     this.task.subtasks.push({ title: '', completed: false });
   }
 
-  removeSubtask(index: number) {
-    this.task?.subtasks?.splice(index, 1);
-  }
+  removeSubtask = (index: number) => this.task?.subtasks?.splice(index, 1);
 }

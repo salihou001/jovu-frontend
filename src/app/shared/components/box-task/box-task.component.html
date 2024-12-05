@@ -1,5 +1,6 @@
 <div class="box-task-con">
-    <!-- Header de la tâche -->
+
+    <!-- start Header -->
     <div class="box-task-header">
         <div class="box-task-tag" [ngStyle]="{ backgroundColor: tagColor }">
             {{ task.label }}
@@ -8,18 +9,20 @@
             <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
         </div>
     </div>
+    <!-- end Header -->
 
-    <!-- Corps de la tâche -->
+    <!-- start body -->
     <div class="box-task-body">
         <h4>{{ task.title }}</h4>
         <p class="box-task-desc">{{ task.description }}</p>
         <div class="result">
             <span><i class="fa fa-tasks" aria-hidden="true"></i></span>
-            <span>{{ completedSubtasks }}/{{ totalSubtasks }}</span>
+            <span>{{ completedSubtasks() }}/{{ totalSubtasks() }}</span>
         </div>
     </div>
+    <!-- end body -->
 
-    <!-- Pied de la tâche -->
+    <!-- start footer-->
     <div class="box-task-footer">
         <div class="box-task-footer__right">
             <div>
@@ -36,4 +39,6 @@
             </div>
         </div>
     </div>
+    <!-- start footer-->
+
 </div>
