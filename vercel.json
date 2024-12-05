@@ -1,7 +1,11 @@
 {
-  "build": {
-    "env": {
-      "NPM_FLAGS": "--legacy-peer-deps"
+  "builds": [
+    {
+      "src": "src/main.ts",
+      "use": "@vercel/angular"
     }
+  ],
+  "env": {
+    "NODE_ENV": "production"
   }
 }
