@@ -1,14 +1,14 @@
 <div class="form-group">
     <label>Sous-tâches</label>
     <ul class="subtasks-list">
+        <li class="subtask-item">
         @for (subtask of subtasks; track $index; let i = $index) {
-            <li>
                 <input type="checkbox" [(ngModel)]="subtask.completed" [name]="'subtaskCompleted' + i" />
                 <input type="text" [(ngModel)]="subtask.title" [name]="'subtaskTitle' + i"
                     placeholder="Titre de la sous-tâche" />
                 <button type="button" class="remove-btn" (click)="removeSubtask(i)">✕</button>
-            </li>
-        }
+            }
+        </li>
     </ul>
     <button type="button" class="add-subtask-btn" (click)="addSubtask()">+ Ajouter une sous-tâche</button>
 </div>

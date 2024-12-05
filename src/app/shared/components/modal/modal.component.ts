@@ -54,6 +54,12 @@ export class ModalComponent implements OnInit {
     { value: 'In Review', label: 'In Review' },
     { value: 'Done', label: 'Terminé' }
   ];
+  listType = [
+    { value: 'UX/UI', label: 'UX/UI' },
+    { value: 'Frontend', label: 'Frontend' },
+    { value: 'Backend', label: 'Backend' },
+    { value: 'Fullstack', label: 'Fullstack' }
+  ];
   
   private firestore: Firestore = inject(Firestore);
   private toastSrv: ToastrService = inject(ToastrService);

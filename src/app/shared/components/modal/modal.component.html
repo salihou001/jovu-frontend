@@ -17,6 +17,7 @@
         <app-select label="Priorité" [(selected)]="task.priority" [options]="priorityOptions" />
         <app-select label="Statut" [(selected)]="task.status" [options]="statusOptions"></app-select>
         <app-select label="assign to" [(selected)]="task.assignee" [options]="users"></app-select>
+        <app-select label="type" [(selected)]="task.label" [options]="listType"></app-select>
         <app-sub-task-list [(subtasks)]="task.subtasks" />
       </form>
     </div>

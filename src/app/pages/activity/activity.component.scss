@@ -61,6 +61,15 @@
         grid-template-rows: 1fr;
         gap: 10px;
 
+        .wrapper-column {
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: block;
+            padding: 0.5em;
+        }
+
         /* 3 colonnes pour les tablettes en orientation paysage */
         @media (max-width: 1024px) {
             grid-template-columns: repeat(3, 1fr);
