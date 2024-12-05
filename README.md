@@ -1,27 +1,58 @@
-# FrontEnd
+# Enhanced Kanban Board for Engineering Task Management
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.1.
+Une application avancée de tableau Kanban destinée à aider les équipes d'ingénierie à gérer efficacement leurs tâches. Elle inclut des fonctionnalités comme la gestion des tâches, la collaboration en temps réel, et des outils de filtrage et de tri.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🛠️ Technologies utilisées
 
-## Code scaffolding
+- **Frontend** : Angular(18)
+- **State Management** : signal
+- **Backend as a Service (BaaS)** : Firebase
+- **Styling** : SASS/SCSS
+- **Tests** : Unit tests et end-to-end tests
+- **Performance** : Utilisation des composants différés pour optimiser le temps de chargement de l'application
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## 🌟 Fonctionnalités principales
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Authentification
+- Création de compte avec email et mot de passe
+- Connexion/Déconnexion
 
-## Running unit tests
+### Gestion des Tâches
+- Création, édition et suppression de tâches avec :
+  - Titre
+  - Description
+  - Assignation
+  - Dates limites
+  - Étiquettes
+- Déplacement des tâches via **drag-and-drop** (CDK angular)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Collaboration en temps réel
+- Mise à jour en direct lors de modifications ou déplacements des tâches par d'autres utilisateurs (via Firebase)
 
-## Running end-to-end tests
+### Tri et Filtrage
+- Filtrage par statut, assigné, étiquette ou date limite
+- Tri par priorité ou date limite
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Design et UX
+- Design réactif (desktop, tablette, mobile)
+- Support d’accessibilité (ARIA roles, navigation clavier)
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## ⚙️ Installation et Configuration
+
+### Prérequis
+- **Node.js** (v18+ recommandé)
+- **npm** ou **yarn**
+- **Commande npm i --legacy-peer-deps**
+
+
+📩 Contact
+Pour toute question ou clarification, vous pouvez me contacter via :
+
+Email : aboubakarsalihoudang@gmail.com
+Téléphone : +237 679 62 28 08

@@ -1,6 +1,7 @@
 import { Auth, UserCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { DocumentData, Firestore, doc, getDoc, setDoc } from '@angular/fire/firestore';
 import { Injectable, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import * as bcrypt from 'bcryptjs';
 
 @Injectable({
@@ -11,9 +12,10 @@ export class AuthService {
   private usersCollection = 'users';
 
   private auth: Auth = inject(Auth);
+  private router: Router = inject(Router);
   private firestore: Firestore = inject(Firestore);
 
-  // *** INSCRIPTION UTILISATEUR ***
+  // *** Sign up***
   async register(email: string, password: string, confirmPassword: string, displayName: string): Promise<void> {
     try {
       if (password !== confirmPassword) { throw "PasswordDontMatch"; }
@@ -36,7 +38,7 @@ export class AuthService {
     } catch (error) { throw error; }
   }
 
-  // *** CONNEXION UTILISATEUR ***
+  // *** auth user***
   async login(email: string, password: string): Promise<DocumentData> {
     try {
       // Connexion via Firebase Authentication
@@ -50,18 +52,19 @@ export class AuthService {
       if (!userSnapshot.exists()) { throw 'UserNotFound'; }
       const userData = userSnapshot.data();
       const hashedPassword = userData?.['hashedPassword'];
-      // Vérifie si le mot de passe fourni correspond au mot de passe haché
       if (!bcrypt.compareSync(password, hashedPassword)) { throw 'IncorrectPassword'; }
       return userData;
     } catch (error) { throw error; }
   }
 
-  // *** DÉCONNEXION UTILISATEUR ***
+  // *** Log out user***
   async logout(): Promise<void> {
     try {
       await signOut(this.auth);
-    } catch (error) {
-      throw error;
-    }
+      localStorage.clear();
+
+      this.router.navigate(['welcome']);
+    } catch (error) { throw error; }
   }
+
 }

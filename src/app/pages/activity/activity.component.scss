@@ -49,6 +49,31 @@
     }
 }
 
+.logout-button {
+    background-color: #ff4d4f;
+    cursor: pointer;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 16px;
+}
+
+.logout-button:hover {
+    background-color: #ff7875;
+}
+
+.logout-button:active {
+    background-color: #d9363e;
+}
+
+
+
+
 .activity-body {
     width: 100%;
     height: calc(100% - 53px);
